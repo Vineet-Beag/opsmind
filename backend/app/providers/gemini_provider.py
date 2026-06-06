@@ -14,9 +14,22 @@ class GeminiProvider:
     @staticmethod
     def generate(prompt: str) -> str:
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
+        try:
 
-        return response.text
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=prompt
+            )
+
+            return response.text
+
+        except Exception as e:
+
+            return f'''
+{{
+    "main_tf": "",
+    "variables_tf": "",
+    "outputs_tf": "",
+    "error": "{str(e)}"
+}}
+'''
