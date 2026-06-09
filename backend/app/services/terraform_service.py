@@ -11,6 +11,11 @@ class TerraformService:
 
         except Exception:
 
+            if "503" in response_text:
+                return {
+                    "error": response_text
+                }
+
             return {
                 "main_tf": response_text,
                 "variables_tf": "",
