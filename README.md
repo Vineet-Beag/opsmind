@@ -143,7 +143,42 @@ Request:
 - [ ] Infrastructure Deployment Workflows
 
 ---
+## Current Features
 
+### Day 1
+- FastAPI backend
+- AI Gateway
+- Gemini integration
+
+### Day 2
+- Terraform file generation
+- main.tf generation
+- variables.tf generation
+- outputs.tf generation
+
+### Day 3
+- Terraform validation engine
+- Automatic terraform init
+- Automatic terraform validate
+
+### Day 4
+- AutoFix Agent
+- Validation error analysis
+- Self-healing workflow framework
+- Retry mechanism
+- Error handling for LLM failures
+
+## Roadmap
+
+### Day 5
+- Complete self-healing Terraform loop
+- Multi-attempt auto-remediation
+- Validation history
+
+### Day 6
+- Architecture diagram
+- Dockerization improvements
+- Project documentation
 ## Author
 
 Vineet Pal
