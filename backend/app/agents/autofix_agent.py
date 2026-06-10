@@ -1,45 +1,46 @@
 from app.providers.gemini_provider import GeminiProvider
+from app.knowledge.terraform_rules import RULES
 
 
 class AutoFixAgent:
 
     @staticmethod
-    def fix(terraform_code: dict, validation_errors: str):
+    def fix(terraform_code, validation_errors):
 
         prompt = f"""
 You are a Senior Terraform Architect.
 
-IMPORTANT:
-Do NOT wrap the JSON in markdown.
-Do NOT use ```json.
+Follow these rules:
+
+{RULES}
+
+Terraform failed validation.
+
+Fix every issue.
+
 Return ONLY raw JSON.
-
-The following Terraform failed validation.
-
-Fix ALL errors.
-
-Return ONLY valid JSON.
 
 Format:
 
 {{
-  "main_tf": "...",
-  "variables_tf": "...",
-  "outputs_tf": "..."
+  "main_tf":"...",
+  "variables_tf":"...",
+  "outputs_tf":"..."
 }}
 
-Terraform:
-
 MAIN.TF
-{terraform_code.get("main_tf", "")}
+
+{terraform_code.get("main_tf","")}
 
 VARIABLES.TF
-{terraform_code.get("variables_tf", "")}
+
+{terraform_code.get("variables_tf","")}
 
 OUTPUTS.TF
-{terraform_code.get("outputs_tf", "")}
 
-Validation Errors:
+{terraform_code.get("outputs_tf","")}
+
+VALIDATION ERRORS
 
 {validation_errors}
 """

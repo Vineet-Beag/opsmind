@@ -1,32 +1,34 @@
 from app.providers.gemini_provider import GeminiProvider
+from app.knowledge.terraform_rules import RULES
 
 
 class TerraformAgent:
 
     @staticmethod
-    def generate(user_prompt: str):
+    def generate(prompt: str):
 
-        prompt = f"""
+        full_prompt = f"""
 You are a Senior Terraform Architect.
 
-Generate Terraform for Oracle Cloud Infrastructure (OCI).
+Follow these rules strictly:
 
-Return ONLY valid JSON.
+{RULES}
+
+Return ONLY raw JSON.
 
 Format:
 
 {{
-  "main_tf": "terraform code",
-  "variables_tf": "terraform variables",
-  "outputs_tf": "terraform outputs"
+  "main_tf":"...",
+  "variables_tf":"...",
+  "outputs_tf":"..."
 }}
 
-No markdown.
-No explanation.
-No code fences.
-
 User Request:
-{user_prompt}
+
+{prompt}
 """
 
-        return GeminiProvider.generate(prompt)
+        return GeminiProvider.generate(
+            full_prompt
+        )

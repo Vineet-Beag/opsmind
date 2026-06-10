@@ -15,6 +15,7 @@ class AIGateway:
 
         terraform = TerraformService.parse_response(result)
 
+        # Handle Gemini failures
         if terraform.get("error"):
             return {
                 "error": terraform["error"],
